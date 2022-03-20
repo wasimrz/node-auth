@@ -5,7 +5,8 @@ const multer = require("multer");
 const app = express();
 const loadash = require("lodash");
 const capitalize = loadash.capitalize;
-
+const dotenv = require('dotenv');
+dotenv.config();
 const obj = { name: "wasi reza Hello" };
 const str = obj.name;
 
@@ -57,9 +58,10 @@ app.use((error, req, res, next) => {
     const message = error.message;
     res.status(status).json({ message: message });
 });
+
 mongoose
     .connect(
-        "mongodb+srv://wasimrz:wasim9505@cluster0.hom8u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+        process.env.MONGO_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         }
